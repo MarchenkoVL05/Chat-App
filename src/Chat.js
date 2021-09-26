@@ -32,10 +32,11 @@ function Chat({socket, userName, roomID}) {
     return (
         <div className='chat'>
             <div className='chat__header'>
-                <p>LIVE</p>
+                <div className='chat__status'></div>
+                <p>{userName}</p>
             </div>
             <div className='chat__body'>
-                <ScrollToBottom>
+                <ScrollToBottom className='message__container'>
                     {messageList.map((messageContent) => {
                         return (
                             <div>
@@ -43,12 +44,14 @@ function Chat({socket, userName, roomID}) {
                                     className='message'
                                     id={userName === messageContent.author ? "you" : "other"}
                                 >
-                                    <div className="message__content">
-                                        <p>{messageContent.message}</p>
-                                    </div>
-                                    <div className="message__meta">
-                                        <p id="time">{messageContent.time}</p>
-                                        <p id="author">{messageContent.author}</p>
+                                    <div className='message__wrapper'>
+                                        <div className="message__content">
+                                            <p>{messageContent.message}</p>
+                                        </div>
+                                        <div className="message__meta">
+                                            <p id="time">{messageContent.time}</p>
+                                            <p id="author">{messageContent.author}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +71,9 @@ function Chat({socket, userName, roomID}) {
                         event.key === "Enter" && sendMessage();
                     }}
                 />
-                <button onClick={sendMessage}>&#9658;</button>
+                <button onClick={sendMessage}>
+                    <img src='./scribble.svg' alt='send message'/>
+                </button>
             </div>
         </div>
     )

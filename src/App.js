@@ -25,10 +25,11 @@ function App() {
     <div className='App'>
       {!showChat ? (
         <div className="join-chat-container">
-          <h3>Join A Chat</h3>
+          <img src='cloud.svg' alt='cloud' />
+          <h3>let's Chat</h3>
           <input 
             type='text' 
-            placeholder='Vladimir...' 
+            placeholder='Username...' 
             onChange={(event) => {
               setUserName(event.target.value);
             }}
@@ -40,7 +41,7 @@ function App() {
               setRoomID(event.target.value);
             }}
           />
-          <button onClick={ JoinRoom }>Chat</button>
+          <button onClick={ JoinRoom }><span>JOIN</span> A ROOM</button>
         </div>
       ) : (
         <Chat socket={socket} userName={userName} roomID={roomID}/>
