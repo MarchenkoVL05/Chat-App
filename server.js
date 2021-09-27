@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const { Server } = require('socket.io');
 
+const port = process.env.PORT || 3001;
+
 app.use(cors());
 
 const server = http.createServer(app);
@@ -34,6 +36,12 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen('3001', () => {
+app.use(express.static(__dirname + "/build/"));
+
+app.get(/.*/, function (req, res) {
+    res.sendFile(__dirname + '/build/index.html');
+});
+
+server.listen(port, () => {
     console.log('Server is working :)');
 });
